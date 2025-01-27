@@ -17,6 +17,7 @@ const dbConfig = {
   database: process.env.DB_NAME || 'task_manager'
 };
 
+
 let db;
 
 mysql.createConnection(dbConfig)
