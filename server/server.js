@@ -1,13 +1,11 @@
 const express = require('express');
-const mysql = require('mysql2/promise'); // Usamos la versión con promesas
+const mysql = require('mysql2/promise');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require('dotenv').config(); // Cargar variables de entorno
-
+require('dotenv').config(); 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -31,7 +29,6 @@ mysql.createConnection(dbConfig)
     process.exit(1);
   });
 
-// Obtener todas las tareas
 app.get('/tasks', async (req, res) => {
   try {
     const [results] = await db.query('SELECT * FROM tasks');
@@ -42,7 +39,6 @@ app.get('/tasks', async (req, res) => {
   }
 });
 
-// Crear una nueva tarea
 app.post('/tasks', async (req, res) => {
   const { title, description, category, due_date } = req.body;
 
@@ -62,7 +58,6 @@ app.post('/tasks', async (req, res) => {
   }
 });
 
-// Editar una tarea existente
 app.put('/tasks/:id', async (req, res) => {
   const { id } = req.params;
   const { title, description, category, due_date, completed } = req.body;
@@ -88,7 +83,6 @@ app.put('/tasks/:id', async (req, res) => {
   }
 });
 
-// Eliminar una tarea
 app.delete('/tasks/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -110,7 +104,6 @@ app.delete('/tasks/:id', async (req, res) => {
   }
 });
 
-// Middleware para manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Algo salió mal en el servidor' });

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const TaskForm = ({ fetchTasks = () => {} }) => { // Valor por defecto para fetchTasks
+const TaskForm = ({ fetchTasks = () => {} }) => { 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [dueDate, setDueDate] = useState('');
-  const [error, setError] = useState(null); // Estado para errores
+  const [error, setError] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +19,8 @@ const TaskForm = ({ fetchTasks = () => {} }) => { // Valor por defecto para fetc
       setDescription('');
       setCategory('');
       setDueDate('');
-      fetchTasks(); // Actualizar la lista de tareas
-      setError(null); // Limpiar errores previos
+      fetchTasks(); 
+      setError(null); 
     } catch (err) {
       console.error('Error al crear la tarea:', err);
       setError('Hubo un error al crear la tarea. Por favor, inténtalo de nuevo.');

@@ -5,14 +5,12 @@ import TaskDetail from './TaskDetail';
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [error, setError] = useState(null); // Estado para manejar errores
+  const [error, setError] = useState(null);
 
-  // Obtener las tareas al cargar el componente
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  // Función para obtener las tareas
   const fetchTasks = async () => {
     try {
       const response = await axios.get('http://localhost:5000/tasks');
@@ -23,7 +21,6 @@ const TaskList = () => {
     }
   };
 
-  // Función para eliminar una tarea
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/tasks/${id}`);
@@ -34,7 +31,6 @@ const TaskList = () => {
     }
   };
 
-  // Función para editar una tarea
   const handleEdit = async (task) => {
     try {
       const updatedTask = { ...task, completed: !task.completed }; // Cambia el estado de completado
@@ -46,12 +42,10 @@ const TaskList = () => {
     }
   };
 
-  // Función para ver los detalles de una tarea
   const handleViewDetails = (task) => {
     setSelectedTask(task);
   };
 
-  // Función para cerrar el modal de detalles
   const handleCloseDetails = () => {
     setSelectedTask(null);
   };
